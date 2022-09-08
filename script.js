@@ -40,6 +40,9 @@ const displayInfoaboutWeater = (data) => {
   `;
 };
 
+
+
+
 // Každých 5 minut updatuje informace na stránce
 const waitAndUpdateApi = () => {
   let minutesAgo = 1;
@@ -47,14 +50,22 @@ const waitAndUpdateApi = () => {
   window.setInterval(() => {
     const date = new Date();
 
+    if (infoAboutTimeSpan.textContent === `Updated now (refreshed)`) {
+      minutesAgo = 1;
+    }
+
     if (date.getMinutes() % 5 === 0) {
       weatherApiFetch();
       minutesAgo = 0;
+      infoAboutTimeSpan.textContent = `Updated now`
+    } else {
+          infoAboutTimeSpan.textContent = `Updated before ${minutesAgo} ${minutesAgo === 1 ? "minute" : "minutes"}`;
     }
 
-    infoAboutTimeSpan.textContent = `Updated before ${minutesAgo} minutes`;
     minutesAgo++;
   }, 60000);
+
+
 };
 
 
@@ -62,6 +73,7 @@ const waitAndUpdateApi = () => {
 const refreshButtonEvent = () => {
   btnRefresh.addEventListener("click", () => {
 weatherApiFetch()
+infoAboutTimeSpan.textContent = `Updated now (refreshed)`
   })
 }
 
@@ -73,4 +85,5 @@ const AppOn = () => {
 };
 
 AppOn();
+
 
