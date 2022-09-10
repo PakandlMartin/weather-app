@@ -22,6 +22,7 @@ const weatherApiFetch = () => {
     })
     .catch((err) => {
       console.error(err);
+      cityHeader.textContent = "Data bohužel nelze načíst.";
     });
 };
 
