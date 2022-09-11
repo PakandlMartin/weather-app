@@ -31,7 +31,7 @@ const displayInfoaboutWeater = (data) => {
   const current = data.currentConditions;
   cityHeader.textContent = "Praha";
   infoAboutCityParagraph.textContent = data.resolvedAddress;
-  descriptionParagraph.textContent = current.description;
+  descriptionParagraph.textContent =  current.conditions;
   infoFromApiDiv.innerHTML = `
   <p>Temperature: ${current.temp}°C</p>
   <p>Feels like: ${current.feelslike}°C</p>
